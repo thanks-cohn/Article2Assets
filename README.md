@@ -1,80 +1,82 @@
-article_to_assets (ATA)
+DATA
 
-A modular document decompiler and structural asset pipeline
+Documents and Articles to Assets
 
-ATA (pronounced Ada) converts PDFs, scans, and visual documents into structured, machine-readable assets.
+Modular document decompiler and structural dataset pipeline.
 
-1. What ATA Produces
+Convert PDFs and image-based documents into editable, machine-readable structural assets for research, tooling, and downstream pipelines.
 
-ATA transforms documents into:
+Capabilities
+
+DATA converts documents into:
 
 Editable SVG layouts
 Panel / region objects
-Spatial OCR text-line objects
+OCR text-line objects
 Canonical ML-ready JSONL datasets
 Clickable compiled PDFs
-Structured assets for retrieval, training, and analysis
-2. Why ATA Exists
+Structured assets for retrieval, training, and research workflows
+Why DATA Exists
 
-Most document tools stop at extraction.
+Most document tooling stops at extraction.
 
-ATA goes further — it deconstructs documents into reusable structural components.
-
-Instead of treating PDFs as static files, ATA turns them into spatial datasets you can:
-
-Analyze
-Remix
-Train on
-Index
-Rebuild
-
-Use cases include:
+DATA is designed to deconstruct documents and articles into reusable structured components, transforming static PDFs and scans into rich spatial datasets suitable for:
 
 Document AI research
 Vision-language model training
-Retrieval and embedding systems
+Retrieval and embedding pipelines
 Dataset curation
 Layout analysis
-Interactive editing pipelines
-3. Core Features
-3.1 Editable SVG Export
+Manual editing and document remixing
+Core Features
+Editable SVG Export
 
-Convert documents into spatially accurate SVGs with movable text and layout elements.
+Convert documents into spatially faithful SVGs with independently movable text and panel objects.
 
-3.2 Panel / Region Segmentation
+Panel / Region Segmentation
 
-Detect layout blocks, panels, and structural regions.
+Detect structural regions, layout blocks, and visual panels.
 
-3.3 Spatial OCR Extraction
+Spatial OCR Extraction
 
-Extract text line-by-line with bounding boxes and preserved coordinates.
+Extract text line-by-line with bounding boxes and preserved spatial coordinates.
 
-3.4 Canonical Dataset Export
+Canonical Dataset Export
 
-Export structured JSONL suitable for:
+Produce rich JSONL records designed for transformation into:
 
 COCO Layout
-Hugging Face datasets
-Retrieval pipelines
-Custom schemas
-3.5 Clickable PDF Compilation
+Hugging Face JSONL
+Retrieval JSONL
+Custom research schemas
+Clickable PDF Compilation
 
-Merge directory trees into linked, navigable PDFs.
+Merge directory trees into linked, navigable compiled PDFs.
 
-3.6 Modular Pipeline Architecture
+Modular Pipeline Architecture
 
-Each stage is independent, replaceable, and extensible.
+Each stage is independently replaceable, tunable, and extensible.
 
-4. Installation
+Project Philosophy
+
+DATA is being built as a general document and article decompiler, not merely a PDF utility.
+
+Long-term goals include:
+
+Reconstructing documents from canonical JSON
+Converting canonical data into multiple ML and dataset formats
+Supporting comics, magazines, academic PDFs, scanned documents, and hybrid layouts
+Enabling advanced structural document research
+Installation
 pip install -r requirements.txt
-Requirements
+System Requirements
 Python 3.14+
 Tesseract OCR installed system-wide
-Tkinter (for GUI)
-5. Quick Start
-5.1 GUI
+Tkinter installed for GUI support
+Quick Start
+GUI
 python filemonster_gui.py
-5.2 Pipeline Example
+Manual Pipeline
 ./filemonster_scan input_folder -o master.json
 
 ./fm_spatial_text_module.py \
@@ -92,43 +94,34 @@ python filemonster_gui.py
 ./fm_export_canonical_dataset.py \
   --input-dir editable_svg \
   --output-jsonl dataset.jsonl
-6. Philosophy
+Development Notes
 
-ATA is not just a PDF tool.
+Contributions, experiments, and module additions are welcome.
 
-It is a document decompiler.
-
-The goal is to convert visual documents into a canonical structure that can later be:
-
-Reconstructed
-Transformed
-Indexed
-Trained on
-7. Development
-
-ATA is in active development.
-
-Contributions are welcome, especially in:
+If you improve:
 
 Segmentation
-OCR improvements
 Export formats
-Reconstruction pipelines
-GUI usability
-Performance and scaling
+Reconstruction
+GUI functionality
+Performance and scalability
 
-Open an issue or pull request if you want to build on it.
+please open an Issue or Pull Request.
 
-8. Status
+DATA is being actively developed into a broader document decompilation framework.
+
+Status
 
 Active Development
 
-The architecture is evolving as new modules and formats are introduced.
+The project is evolving rapidly and architectural changes may occur as new modules and formats are introduced.
 
-9. License
+License
 
-GNU Affero General Public License v3.0 (AGPL-3.0)
+DATA is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
 
-Free to use, modify, and distribute under AGPL
-Network-deployed modifications must remain open-source
-Commercial licensing available separately
+You are free to use, modify, and distribute DATA under AGPL terms
+Derivative works and network-deployed versions must remain open under AGPL
+Commercial and proprietary licensing is available separately
+
+For commercial licensing inquiries,please contact.
