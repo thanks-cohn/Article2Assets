@@ -1,106 +1,77 @@
-# FileMonster
+article_to_assets (ATA)
 
-**Modular document decompiler and structural dataset pipeline**
+A modular document decompiler and structural asset pipeline
 
-Convert PDFs and image-based documents into editable, machine-readable structural assets for research, tooling, and downstream pipelines.
+ATA (pronounced Ada) converts PDFs, scans, and visual documents into structured, machine-readable assets.
 
----
+What ATA Produces
+Editable SVG layouts
+Panel / region objects
+Spatial OCR text-line objects
+Canonical ML-ready JSONL datasets
+Clickable compiled PDFs
+Structured assets for retrieval, training, and analysis
+Why ATA Exists
 
-## Capabilities
+Most document tools stop at extraction.
 
-FileMonster converts documents into:
+ATA goes further—it deconstructs documents into reusable structural components.
 
-- Editable SVG layouts  
-- Panel / region objects  
-- OCR text-line objects  
-- Canonical ML-ready JSONL datasets  
-- Clickable compiled PDFs  
-- Structured assets for retrieval / training / research workflows  
+Instead of treating PDFs as static files, ATA turns them into spatial datasets you can:
 
----
+analyze
+remix
+train on
+index
+rebuild
 
-## Why FileMonster Exists
+Use cases include:
 
-Most document tooling stops at extraction.
+Document AI research
+Vision-language model training
+Retrieval and embedding systems
+Dataset curation
+Layout analysis
+Interactive editing
+Core Features
+Editable SVG Export
 
-FileMonster aims to **deconstruct documents into reusable structured components**, transforming static PDFs and scans into rich spatial datasets suitable for:
+Convert documents into spatially accurate SVGs with movable text and layout elements.
 
-- Document AI research  
-- Vision-language model training  
-- Retrieval / embedding pipelines  
-- Dataset curation  
-- Layout analysis  
-- Manual editing / document remixing  
+Panel / Region Segmentation
 
----
+Detect layout blocks, panels, and structural regions.
 
-## Core Features
+Spatial OCR Extraction
 
-### Editable SVG Export
-Convert PDFs into spatially faithful SVGs with independently movable text and panel objects.
+Extract text line-by-line with bounding boxes and coordinates.
 
-### Panel / Region Segmentation
-Detect structural regions, layout blocks, and visual panels.
+Canonical Dataset Export
 
-### Spatial OCR Extraction
-Extract text line-by-line with bounding boxes and preserved spatial coordinates.
+Export structured JSONL suitable for:
 
-### Canonical Dataset Export
-Produce rich JSONL records designed for later transformation into:
+COCO Layout
+Hugging Face datasets
+Retrieval pipelines
+Custom schemas
+Clickable PDF Compilation
 
-- COCO Layout  
-- Hugging Face JSONL  
-- Retrieval JSONL  
-- Custom research schemas  
+Merge directories into linked, navigable PDFs.
 
-### Clickable PDF Compilation
-Merge directory trees into linked / navigable compiled PDFs.
+Modular Pipeline
 
-### Modular Pipeline Architecture
-Each stage is independently replaceable, tunable, and extensible.
+Each stage is independent and replaceable.
 
----
-
-## Project Philosophy
-
-FileMonster is being built as a **general document decompiler**, not merely a PDF utility.
-
-Long-term goals include:
-
-- Reconstructing documents from canonical JSON  
-- Converting canonical data into multiple ML/dataset formats  
-- Supporting comics, magazines, academic PDFs, scanned documents, and hybrid layouts  
-- Enabling advanced structural document research  
-
----
-
-## Installation
-
-```bash
+Installation
 pip install -r requirements.txt
-```
-
-### System Requirements
-
-- Python 3.14+
-- Tesseract OCR installed system-wide
-- Tkinter installed for GUI support
-
----
-
-## Quick Start
-
-### GUI
-
-```bash
+Requirements
+Python 3.14+
+Tesseract OCR installed system-wide
+Tkinter (for GUI)
+Quick Start
+GUI
 python filemonster_gui.py
-```
-
----
-
-### Manual Pipeline
-
-```bash
+Pipeline Example
 ./filemonster_scan input_folder -o master.json
 
 ./fm_spatial_text_module.py \
@@ -118,43 +89,41 @@ python filemonster_gui.py
 ./fm_export_canonical_dataset.py \
   --input-dir editable_svg \
   --output-jsonl dataset.jsonl
-```
+Philosophy
 
----
+ATA is not just a PDF tool.
 
-## Development Notes
+It is a document decompiler.
 
-Contributions, experiments, and module additions are welcome.
+The goal is to convert visual documents into a canonical structure that can later be:
 
-If you improve:
+reconstructed
+transformed
+indexed
+trained on
+Development
 
-- segmentation  
-- export formats  
-- reconstruction  
-- GUI functionality  
-- performance / scalability  
+ATA is in active development.
 
-please open an Issue or Pull Request.
+Contributions are welcome, especially in:
 
-We are actively building FileMonster into a broader document decompilation framework and deeply appreciate anyone who takes interest in the project.
+segmentation
+OCR improvements
+export formats
+reconstruction
+GUI usability
+performance
 
----
+Open an issue or pull request if you want to build on it.
 
-## Status
+Status
 
-**Active Development**
+Active development. Expect changes as the architecture evolves.
 
-The project is evolving rapidly and architectural changes may occur as new modules and formats are introduced.
+License
 
----
-## License
+GNU Affero General Public License v3.0 (AGPL-3.0)
 
-FileMonster is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
-
-This means:
-
-- You are free to use, modify, and distribute FileMonster under AGPL terms  
-- Derivative works and network-deployed modified versions must also remain open under AGPL  
-- Commercial / proprietary licensing is available separately for organizations seeking closed-source or private integration rights  
-
-For commercial licensing inquiries, contact the project maintainer
+Free to use and modify under AGPL
+Network-deployed modifications must remain open
+Commercial licensing available separately
