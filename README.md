@@ -67,7 +67,8 @@ chmod +x filemonster_scan
 ./filemonster_scan "your_article.pdf" -o master.json
 ```
 # ↑ Replace "your_article.pdf" with your file
-    You can also pass a directory:
+    
+  You can also pass a directory:
 
 ```text  
   ./filemonster_scan "/path/to/folder"
@@ -79,8 +80,9 @@ chmod +x filemonster_scan
 ------------------------------------------------------------
  STEP 2 — EXTRACT TEXT (LINE BY LINE)
 ------------------------------------------------------------
-
+```text
 python fm_spatial_text_module.py --master master.json --granularity line --show-boxes
+```
 
 # This pulls every line of text + coordinates
 
@@ -88,7 +90,11 @@ python fm_spatial_text_module.py --master master.json --granularity line --show-
  STEP 3 — DETECT ARTICLE STRUCTURE
 ------------------------------------------------------------
 
+
+```text
 python fm_layout_regions_module.py --master master.json --profile article --pdf-zoom 2.5 --crop-panels --crop-panel-group --svg --embed-page-background
+```
+
 
 # --profile article is the key
 # This finds paragraphs, columns, callouts, sections
@@ -96,8 +102,9 @@ python fm_layout_regions_module.py --master master.json --profile article --pdf-
 ------------------------------------------------------------
  STEP 4 — BUILD FINAL SVG + JSON
 ------------------------------------------------------------
-
+```text
 python fm_panel_text_svg_export.py --master master.json --output-dir editable_svg_article
+```
 
 # This combines everything into:
 # SVG (visual layout) + JSON (structure)
@@ -105,8 +112,10 @@ python fm_panel_text_svg_export.py --master master.json --output-dir editable_sv
 ------------------------------------------------------------
  STEP 5 — OPEN THE RESULT
 ------------------------------------------------------------
-
+```text
 xdg-open editable_svg_article
+```
+
 
 # Open the SVG file
 # Move blocks around → you’ll immediately see what this is
@@ -114,11 +123,11 @@ xdg-open editable_svg_article
 ------------------------------------------------------------
  WHAT YOU GET
 ------------------------------------------------------------
-
+```
 editable_svg_article/
   ├── page_0001.svg
   └── page_0001.json
-
+```
 ------------------------------------------------------------
  WHAT YOU CAN DO NOW
 ------------------------------------------------------------
