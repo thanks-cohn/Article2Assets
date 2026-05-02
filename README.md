@@ -46,25 +46,35 @@ Every line becomes usable.
 ------------------------------------------------------------
 
 # Go to where you downloaded the project
+
+```text
 cd ~/Downloads/Article2Assets-main
+```
 
 # Install everything needed (just once)
+```text
 pip install -r requirements.txt
-
+```
 # Make the scanner executable (important)
-chmod +x filemonster_scan
 
+```text
+chmod +x filemonster_scan
+```
 ------------------------------------------------------------
  STEP 1 — SCAN YOUR FILE
 ------------------------------------------------------------
-
+```text
 ./filemonster_scan "your_article.pdf" -o master.json
-
+```
 # ↑ Replace "your_article.pdf" with your file
-#   You can also pass a directory:
-#   ./filemonster_scan "/path/to/folder"
+    You can also pass a directory:
 
-# This builds a master index of your files
+```text  
+  ./filemonster_scan "/path/to/folder"
+```
+
+
+**This builds a master index of your files**
 
 ------------------------------------------------------------
  STEP 2 — EXTRACT TEXT (LINE BY LINE)
