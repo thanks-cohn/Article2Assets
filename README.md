@@ -120,7 +120,7 @@ Bingo bongo.
 This is the exact structure proven to work well on article PDFs:
 
 ```bash
-cd ~/Downloads/Article2Asset-main
+cd ~/Downloads/Article2Assets-main
 
 pip install -r requirements.txt
 
