@@ -10,8 +10,8 @@
        ╚════██╗   ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
         █████╔╝   ███████║███████╗███████╗█████╗     ██║   ███████╗
        ██╔═══╝    ██╔══██║╚════██║╚════██║██╔══╝     ██║   ╚════██║
-       ███████╗██╗██║  ██║███████║███████║███████╗   ██║   ███████║
-       ╚══════╝╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+       ███████╗   ██║  ██║███████║███████║███████╗   ██║   ███████║
+       ╚══════╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 ```
 
 # article2assets
@@ -71,19 +71,19 @@ cd ~/Downloads
 Unzip:
 
 ```bash
-unzip DATA-main.zip
+unzip Article2Assets-main.zip
 ```
 
 Enter the folder:
 
 ```bash
-cd ~/Downloads/DATA-main
+cd ~/Downloads/Article2Assets-main
 ```
 
 Install requirements:
 
 ```bash
-pip install -r requirements_article2assets.txt
+pip install -r requirements.txt
 ```
 
 Run article2assets:
@@ -120,9 +120,9 @@ Bingo bongo.
 This is the exact structure proven to work well on article PDFs:
 
 ```bash
-cd ~/Downloads/DATA-main
+cd ~/Downloads/Article2Asset-main
 
-pip install -r requirements_article2assets.txt
+pip install -r requirements.txt
 
 ./filemonster_scan "/home/big-bro/Documents/articles/Iran US War News_ JD Vance Fears Pete Hegseth 'Misleading' Trump On Iran War_ Report.pdf" -o master.json && \
 python fm_spatial_text_module.py --master master.json --granularity line --show-boxes && \
