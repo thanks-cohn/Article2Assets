@@ -13,31 +13,138 @@
        ███████╗   ██║  ██║███████║███████║███████╗   ██║   ███████║
        ╚══════╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 ```
-# article2assets
+============================================================
+ ARTICLE2ASSETS
+ Turn articles into assets. Instantly.
+============================================================
 
-3 commands. 1 PDF. Full structure.
+Ever wanted to...
 
-Turn article PDFs into:
-- editable SVG layouts  
-- movable region image objects  
-- line-by-line text objects  
-- cropped layout assets  
-- structured JSON  
+Turn a PDF article into editable blocks?
+Break a document into movable images?
+Extract structured text + layout for ML or search?
 
-This is not OCR.
-This is article decomposition.
+This does exactly that.
 
-## QUICK START
+------------------------------------------------------------
+ WHAT THIS ACTUALLY IS
+------------------------------------------------------------
 
-cd ~/Downloads
-unzip Article2Assets-main.zip
-cd Article2Assets-main
+Not OCR.
+
+This is:
+
+  PDF → structure → regions → text → assets → SVG → JSON
+
+Every paragraph becomes an object.
+Every line becomes usable.
+
+------------------------------------------------------------
+ RUN IT (STEP BY STEP)
+------------------------------------------------------------
+
+# Go to where you downloaded the project
+cd ~/Downloads/Article2Assets-main
+
+# Install everything needed (just once)
 pip install -r requirements.txt
+
+# Make the scanner executable (important)
 chmod +x filemonster_scan
 
-./filemonster_scan "your_article.pdf" -o master.json && \
-python fm_spatial_text_module.py --master master.json --granularity line --show-boxes && \
-python fm_layout_regions_module.py --master master.json --profile article --pdf-zoom 2.5 --crop-panels --crop-panel-group --svg --embed-page-background && \
+------------------------------------------------------------
+ STEP 1 — SCAN YOUR FILE
+------------------------------------------------------------
+
+./filemonster_scan "your_article.pdf" -o master.json
+
+# ↑ Replace "your_article.pdf" with your file
+#   You can also pass a directory:
+#   ./filemonster_scan "/path/to/folder"
+
+# This builds a master index of your files
+
+------------------------------------------------------------
+ STEP 2 — EXTRACT TEXT (LINE BY LINE)
+------------------------------------------------------------
+
+python fm_spatial_text_module.py --master master.json --granularity line --show-boxes
+
+# This pulls every line of text + coordinates
+
+------------------------------------------------------------
+ STEP 3 — DETECT ARTICLE STRUCTURE
+------------------------------------------------------------
+
+python fm_layout_regions_module.py --master master.json --profile article --pdf-zoom 2.5 --crop-panels --crop-panel-group --svg --embed-page-background
+
+# --profile article is the key
+# This finds paragraphs, columns, callouts, sections
+
+------------------------------------------------------------
+ STEP 4 — BUILD FINAL SVG + JSON
+------------------------------------------------------------
+
 python fm_panel_text_svg_export.py --master master.json --output-dir editable_svg_article
 
+# This combines everything into:
+# SVG (visual layout) + JSON (structure)
+
+------------------------------------------------------------
+ STEP 5 — OPEN THE RESULT
+------------------------------------------------------------
+
 xdg-open editable_svg_article
+
+# Open the SVG file
+# Move blocks around → you’ll immediately see what this is
+
+------------------------------------------------------------
+ WHAT YOU GET
+------------------------------------------------------------
+
+editable_svg_article/
+  ├── page_0001.svg
+  └── page_0001.json
+
+------------------------------------------------------------
+ WHAT YOU CAN DO NOW
+------------------------------------------------------------
+
+- move article blocks like design elements
+- extract structured datasets
+- build search/index systems
+- feed layout-aware ML models
+- reconstruct documents visually
+
+------------------------------------------------------------
+ CORE IDEA
+------------------------------------------------------------
+
+An article is not just text.
+
+It is:
+
+- layout
+- hierarchy
+- flow
+- emphasis
+
+article2assets preserves all of it.
+
+------------------------------------------------------------
+ FINAL
+------------------------------------------------------------
+
+Run it once.
+Open the SVG.
+Move a paragraph.
+
+You’ll understand immediately.
+============================================================
+
+
+
+
+
+
