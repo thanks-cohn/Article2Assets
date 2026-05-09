@@ -58,20 +58,36 @@ Example:
 
 ------------------------------------------------------------
 ```text
-cd ~/Desktop/Article2Assets
+# Clone Article2Assets
+git clone https://github.com/thanks-cohn/Article2Assets.git
+
+# Enter repository
+cd Article2Assets
+
+# Create virtual environment
+python -m venv .venv
+
+# Activate environment
 source .venv/bin/activate
 
+# Install dependencies
+pip install -r requirements.txt
+
+# Set your PDF here
 SRC="$HOME/Documents/article.pdf"
 
+# Output directories
 OUT="$HOME/Desktop/a2a_output"
 SAFE_DIR="$HOME/Desktop/a2a_safe_inputs"
 
-mkdir -p "$OUT"
-mkdir -p "$SAFE_DIR"
+mkdir -p "$OUT" "$SAFE_DIR"
 
+# Copy input into controlled workspace
 cp "$SRC" "$SAFE_DIR/input.pdf"
 
-./filemonster_scan "$SAFE_DIR/input.pdf" -o "$OUT/master.json"
+# Run full Article2Assets pipeline
+./filemonster_scan "$SAFE_DIR/input.pdf" \
+  -o "$OUT/master.json"
 
 python fm_spatial_text_module.py \
   --master "$OUT/master.json" \
@@ -91,7 +107,10 @@ python fm_panel_text_svg_export.py \
   --master "$OUT/master.json" \
   --output-dir "$OUT/final_svg"
 
-xdg-open "$OUT/final_svg"
+# Final output
+echo
+echo "DONE:"
+echo "$OUT/final_svg"
 ```
 ------------------------------------------------------------
 
