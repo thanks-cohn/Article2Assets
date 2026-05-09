@@ -1,0 +1,33 @@
+{
+  "schema": {"name": "FMIAF", "version": "0.3.0"},
+  "record_type": "master_ledger",
+  "created_utc": "2026-05-09T06:34:34Z",
+  "root_path_at_scan": "/home/big-bro/Desktop/a2a_safe_inputs",
+  "module_index": "filemonster_module_index.jsonl",
+  "design": {
+    "master_role": "portable ledger pointing to sidecars and module JSON blocks",
+    "sidecar_role": "per-file passport and annotation socket",
+    "module_role": "separate appendable JSON outputs registered by relative path"
+  },
+  "files": [
+    {
+      "fm_id": "FM1:b43dc801d3d728124b333071",
+      "ff_id": "FF1:ef3aa6a0c9b99cd1148c8553",
+      "path": "cnn_iran_factcheck.pdf",
+      "sidecar": "cnn_iran_factcheck.pdf.fm.json",
+      "module_output_directory": "cnn_iran_factcheck.pdf.fm.modules",
+      "module_outputs": [],
+      "media_type": "document",
+      "format": "pdf",
+      "size_bytes": 3143922,
+      "width": 0,
+      "height": 0,
+      "sha256": "b43dc801d3d728124b3330717bcbdfcd8c7747dd98ce53130b3145d03f433428"
+    }
+  ],
+  "summary": {
+    "files_seen": 1,
+    "files_written": 1,
+    "files_skipped": 0
+  }
+}
