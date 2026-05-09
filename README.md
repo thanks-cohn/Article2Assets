@@ -314,6 +314,96 @@ Tested successfully against a:
 - 14976px tall
 - ~3MB CNN article PDF
 
+```
+cd ~/Desktop/Article2Assets
+source .venv/bin/activate
+
+# Change this to the PDF you want to process.
+SRC="$HOME/Documents/articles/example_article.pdf"
+
+# Safe working paths.
+SAFE_DIR="$HOME/Desktop/a2a_safe_inputs"
+SAFE_NAME="article_input.pdf"
+SAFEPDF="$SAFE_DIR/$SAFE_NAME"
+
+OUT="$HOME/Desktop/Article2Assets/a2a_article_test"
+
+rm -rf "$OUT"
+mkdir -p "$OUT"
+mkdir -p "$SAFE_DIR"
+
+# Copy the PDF to a simple ASCII-safe filename.
+# This avoids path issues with spaces, punctuation, apostrophes, and nested output folders.
+cp "$SRC" "$SAFEPDF"
+
+echo "== PDF INFO =="
+python - <<'PY' "$SAFEPDF"
+import fitz, os, sys
+p = sys.argv[1]
+doc = fitz.open(p)
+print("file:", p)
+print("pages:", len(doc))
+print("size_mb:", round(os.path.getsize(p) / 1024 / 1024, 3))
+for i, page in enumerate(doc):
+    print(f"page_{i+1}_dims:", round(page.rect.width), "x", round(page.rect.height))
+doc.close()
+PY
+
+echo
+echo "== STAGE 1: SCAN =="
+time ./filemonster_scan "$SAFEPDF" -o "$OUT/master.json"
+
+echo
+echo "== STAGE 2: SPATIAL TEXT =="
+time python fm_spatial_text_module.py \
+  --master "$OUT/master.json" \
+  --granularity line \
+  --show-boxes
+
+echo
+echo "== STAGE 3: LAYOUT REGIONS =="
+time python fm_layout_regions_module.py \
+  --master "$OUT/master.json" \
+  --profile article \
+  --pdf-zoom 1.0 \
+  --crop-panels \
+  --crop-panel-group \
+  --svg \
+  --embed-page-background
+
+echo
+echo "== STAGE 4: FINAL SVG EXPORT =="
+time python fm_panel_text_svg_export.py \
+  --master "$OUT/master.json" \
+  --output-dir "$OUT/final_svg"
+
+echo
+echo "== FILE COUNTS =="
+find "$OUT" -type f | awk '
+/\.svg$/ {svg++}
+/\.json$/ {json++}
+/\.jsonl$/ {jsonl++}
+/\.png$/ {png++}
+END{
+print "svg:", svg+0
+print "json:", json+0
+print "jsonl:", jsonl+0
+print "png:", png+0
+}'
+
+echo
+echo "== LARGEST SVG FILES =="
+find "$OUT" -name "*.svg" -exec du -h {} \; | sort -hr | head -20
+
+echo
+echo "== OPEN RESULT =="
+xdg-open "$OUT/final_svg" >/dev/null 2>&1 &
+```
+
+
+
+
+
 Pipeline stages:
 
 - file scan
