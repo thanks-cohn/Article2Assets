@@ -44,81 +44,62 @@ Every line becomes usable.
 ------------------------------------------------------------
  RUN IT (STEP BY STEP)
 ------------------------------------------------------------
+============================================================
+ QUICK START
+============================================================
 
-# Go to where you downloaded the project
+1. Put your PDF somewhere easy to access.
 
-```text
-cd ~/Downloads/Article2Assets-main
-```
+Example:
 
-# Install everything needed (just once)
-```text
-pip install -r requirements.txt
-```
-# Make the scanner executable (important)
+  ~/Documents/article.pdf
 
-```text
-chmod +x filemonster_scan
-```
-------------------------------------------------------------
- STEP 1 — SCAN YOUR FILE
-------------------------------------------------------------
-```text
-./filemonster_scan "your_article.pdf" -o master.json
-```
-# ↑ Replace "your_article.pdf" with your file
-    
-  You can also pass a directory:
-
-```text  
-  ./filemonster_scan "/path/to/folder"
-```
-
-
-**This builds a master index of your files**
+2. Run this:
 
 ------------------------------------------------------------
- STEP 2 — EXTRACT TEXT (LINE BY LINE)
+
+cd ~/Desktop/Article2Assets
+source .venv/bin/activate
+
+SRC="$HOME/Documents/article.pdf"
+
+OUT="$HOME/Desktop/a2a_output"
+SAFE_DIR="$HOME/Desktop/a2a_safe_inputs"
+
+mkdir -p "$OUT"
+mkdir -p "$SAFE_DIR"
+
+cp "$SRC" "$SAFE_DIR/input.pdf"
+
+./filemonster_scan "$SAFE_DIR/input.pdf" -o "$OUT/master.json"
+
+python fm_spatial_text_module.py \
+  --master "$OUT/master.json" \
+  --granularity line \
+  --show-boxes
+
+python fm_layout_regions_module.py \
+  --master "$OUT/master.json" \
+  --profile article \
+  --pdf-zoom 1.0 \
+  --crop-panels \
+  --crop-panel-group \
+  --svg \
+  --embed-page-background
+
+python fm_panel_text_svg_export.py \
+  --master "$OUT/master.json" \
+  --output-dir "$OUT/final_svg"
+
+xdg-open "$OUT/final_svg"
+
 ------------------------------------------------------------
-```text
-python fm_spatial_text_module.py --master master.json --granularity line --show-boxes
-```
 
-# This pulls every line of text + coordinates
+3. Open the SVG.
 
-------------------------------------------------------------
- STEP 3 — DETECT ARTICLE STRUCTURE
-------------------------------------------------------------
+Move blocks around.
 
-
-```text
-python fm_layout_regions_module.py --master master.json --profile article --pdf-zoom 2.5 --crop-panels --crop-panel-group --svg --embed-page-background
-```
-
-
-# --profile article is the key
-# This finds paragraphs, columns, callouts, sections
-
-------------------------------------------------------------
- STEP 4 — BUILD FINAL SVG + JSON
-------------------------------------------------------------
-```text
-python fm_panel_text_svg_export.py --master master.json --output-dir editable_svg_article
-```
-
-# This combines everything into:
-# SVG (visual layout) + JSON (structure)
-
-------------------------------------------------------------
- STEP 5 — OPEN THE RESULT
-------------------------------------------------------------
-```text
-xdg-open editable_svg_article
-```
-
-
-# Open the SVG file
-# Move blocks around → you’ll immediately see what this is
+You’ll immediately understand what Article2Assets does.
 
 ------------------------------------------------------------
  WHAT YOU GET
