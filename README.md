@@ -169,3 +169,9 @@ You’ll understand immediately.
 
 
 
+
+## Python Requirement
+
+- Python 3.12.x recommended
+- Supported range: Python >=3.11,<3.14
+- Python 3.14+ may fail due to scientific stack wheel availability during newer ecosystem transitions.
