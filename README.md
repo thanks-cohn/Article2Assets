@@ -345,3 +345,50 @@ Layout extraction speed depends heavily on:
 
 Very tall webpage-style PDFs benefit from lower render zoom values
 (e.g. --pdf-zoom 1.0).
+
+### Benchmark: Real-World Long-Form News Article PDF
+
+Environment:
+
+- Linux x86_64
+- modern multi-threaded CPU
+- integrated GPU
+- Python 3.12
+
+Stress-test document:
+
+- CNN Politics article PDF
+- 1 page
+- ~3 MB
+- dimensions: 1859 × 14976
+
+Pipeline timings:
+
+| Stage | Time |
+|---|---|
+| filemonster_scan | ~0.007s |
+| spatial_text_module | ~0.381s |
+| layout_regions_module | ~2.655s |
+| panel_text_svg_export | ~1.066s |
+
+Extraction results:
+
+- regions detected: 11
+- blocks detected: 11
+- crops generated: 11
+- SVGs generated: 1
+- JSON outputs: 2
+
+Generated editable SVG:
+
+- size: ~5 MB
+- fully editable
+- preserved panel overlays
+- preserved text positioning
+- preserved spatial structure
+
+Notes:
+
+- long webpage-style PDFs work successfully
+- lower zoom values (e.g. --pdf-zoom 1.0) perform better for extremely tall documents
+- sanitized ASCII-safe filenames improve SVG crop portability across viewers/editors
