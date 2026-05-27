@@ -1,200 +1,134 @@
+# reiser4-linux7
+
+## Reiser4 Linux 7.x Resurrection
+
+### Vision
+
+Reiser4 was one of the most ambitious filesystem projects ever attempted on Linux.
+
+It pursued ideas that still feel futuristic today:
+
+- semantic file organization
+- plugin-based filesystem architecture
+- efficient handling of small files
+- dynamic trees
+- flexible metadata models
+- filesystem-level extensibility
+
+But time moved on.
+
+Kernel APIs evolved.
+Memory management changed.
+Folios replaced pages.
+VFS internals shifted.
+Writeback infrastructure mutated.
+The original codebase slowly fossilized against modern Linux.
+
+This repository exists to reverse that process.
+
+---
+
+## What This Project Is
+
+`reiser4-linux7` is an active compatibility and resurrection branch focused on:
+
+- Linux 7.x compatibility
+- modern kernel API adaptation
+- folio migration
+- modern bio/writeback integration
+- VFS compatibility restoration
+- continued buildability on modern GCC/Clang systems
+- preservation of Reiser4's architecture and ideas
+
+The goal is simple:
+
+```bash
+git clone https://github.com/thanks-cohn/reiser4-linux7
+cd reiser4-linux7
+make
+sudo make install
+sudo modprobe reiser4
 ```
-  █████╗ ██████╗ ████████╗██╗ ██████╗██╗     ███████╗
- ██╔══██╗██╔══██╗╚══██╔══╝██║██╔════╝██║     ██╔════╝
- ███████║██████╔╝   ██║   ██║██║     ██║     █████╗
- ██╔══██║██╔══██╗   ██║   ██║██║     ██║     ██╔══╝
- ██║  ██║██║  ██║   ██║   ██║╚██████╗███████╗███████╗
- ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚══════╝╚══════╝
 
-       ██████╗     █████╗ ███████╗███████╗███████╗████████╗███████╗
-       ╚════██╗   ██╔══██╗██╔════╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
-        █████╔╝   ███████║███████╗███████╗█████╗     ██║   ███████╗
-       ██╔═══╝    ██╔══██║╚════██║╚════██║██╔══╝     ██║   ╚════██║
-       ███████╗   ██║  ██║███████║███████║███████╗   ██║   ███████║
-       ╚══════╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-```
+And Reiser4 lives again on modern Linux systems.
 
-```
-============================================================
- ARTICLE2ASSETS
- Turn articles into assets. Instantly.
-============================================================
-```
-Ever wanted to...
+---
 
-Turn a PDF article into editable blocks?
-Break a document into movable images?
-Extract structured text + layout for ML or search?
+## Why This Matters
 
-This does exactly that.
+Modern Linux filesystems are powerful, but many ideas pioneered by Reiser4 remain uniquely compelling.
 
-------------------------------------------------------------
- WHAT THIS ACTUALLY IS
-------------------------------------------------------------
+Reiser4 was not merely a storage format.
+It was an exploration of what a filesystem could become.
 
-Not OCR.
+This project preserves:
 
-This is:
+- filesystem experimentation
+- Linux history
+- plugin-oriented filesystem design
+- semantic storage concepts
+- alternative VFS philosophies
 
-  PDF → structure → regions → text → assets → SVG → JSON
+while making them usable again on contemporary systems.
 
-Every paragraph becomes an object.
-Every line becomes usable.
+---
 
-------------------------------------------------------------
- RUN IT (STEP BY STEP)
-------------------------------------------------------------
+## Current Status
 
-## QUICK START
+This is an active porting effort.
 
+Current work includes:
 
-1. Put your PDF somewhere easy to access.
+- folio migration wrappers
+- page cache modernization
+- bio API compatibility
+- writeback subsystem adaptation
+- mount API migration
+- superblock operation updates
+- Linux 7.x kernel compatibility fixes
 
-Example:
+The filesystem is NOT yet production ready on Linux 7.x.
 
-  ~/Documents/article.pdf
+But the codebase is actively compiling deeper into modern kernels with each compatibility layer restored.
 
-2. Run this:
+---
 
-------------------------------------------------------------
-```text
-# Clone Article2Assets
-git clone https://github.com/thanks-cohn/Article2Assets.git
+## Relationship To Userspace Tools
 
-# Enter repository
-cd Article2Assets
+This repository focuses on the kernel driver.
 
-# Create virtual environment
-python -m venv .venv
+Userspace tools are maintained separately through:
 
-# Activate environment
-source .venv/bin/activate
+- mkfs.reiser4
+- fsck.reiser4
+- debugfs.reiser4
+- measurefs.reiser4
 
-# Install dependencies
-pip install -r requirements.txt
+via the companion compatibility project:
+`fixed-reiser4progs`
 
-# Set your PDF here
-SRC="$HOME/Documents/article.pdf"
+---
 
-# Output directories
-OUT="$HOME/Desktop/a2a_output"
-SAFE_DIR="$HOME/Desktop/a2a_safe_inputs"
+## Long-Term Goals
 
-mkdir -p "$OUT" "$SAFE_DIR"
+- Fully buildable Reiser4 kernel module on Linux 7.x
+- DKMS packaging
+- Arch/Garuda packaging
+- Modern distro compatibility
+- Filesystem mounting through standard Linux VFS
+- Seamless integration with KDE Dolphin and standard Linux file managers
+- Preservation of Reiser4 research and design philosophy
 
-# Copy input into controlled workspace
-cp "$SRC" "$SAFE_DIR/input.pdf"
+---
 
-# Run full Article2Assets pipeline
-./filemonster_scan "$SAFE_DIR/input.pdf" \
-  -o "$OUT/master.json"
+## Philosophy
 
-python fm_spatial_text_module.py \
-  --master "$OUT/master.json" \
-  --granularity line \
-  --show-boxes
+This project is not about nostalgia.
 
-python fm_layout_regions_module.py \
-  --master "$OUT/master.json" \
-  --profile article \
-  --pdf-zoom 1.0 \
-  --crop-panels \
-  --crop-panel-group \
-  --svg \
-  --embed-page-background
+It is about refusing to let powerful ideas disappear merely because APIs changed.
 
-python fm_panel_text_svg_export.py \
-  --master "$OUT/master.json" \
-  --output-dir "$OUT/final_svg"
+Software archaeology matters.
+Filesystem experimentation matters.
+Alternative systems thinking matters.
 
-# Final output
-echo
-echo "DONE:"
-echo "$OUT/final_svg"
-```
-------------------------------------------------------------
-
-3. Open the SVG.
-
-Move blocks around.
-
-You’ll immediately understand what Article2Assets does.
-
-------------------------------------------------------------
- WHAT YOU GET
-------------------------------------------------------------
-```
-editable_svg_article/
-  ├── page_0001.svg
-  └── page_0001.json
-```
-------------------------------------------------------------
- WHAT YOU CAN DO NOW
-------------------------------------------------------------
-
-- move article blocks like design elements
-- extract structured datasets
-- build search/index systems
-- feed layout-aware ML models
-- reconstruct documents visually
-
-------------------------------------------------------------
- CORE IDEA
-------------------------------------------------------------
-
-An article is not just text.
-
-It is:
-
-- layout
-- hierarchy
-- flow
-- emphasis
-
-article2assets preserves all of it.
-
-------------------------------------------------------------
- FINAL
-------------------------------------------------------------
-
-Run it once.
-Open the SVG.
-Move a paragraph.
-
-You’ll understand immediately.
-
-
-##  REQUIREMENTS + REAL-WORLD NOTES
-
-
-Python:
-- Python 3.12 recommended
-- Supported range: Python >=3.11,<3.14
-
-Tested environment:
-- Linux x86_64
-- modern multi-threaded CPU
-- integrated GPU
-
-Known caveats:
-- ASCII-safe filenames currently recommended
-- keep sanitized PDFs outside output directories
-- lower render zoom values perform better for very tall PDFs
-
-Stress test:
-- CNN Politics PDF
-- 1859 × 14976
-- ~3MB
-- editable SVG reconstruction successful
-
-Pipeline timings:
-- filemonster_scan: ~0.007s
-- spatial_text_module: ~0.381s
-- layout_regions_module: ~2.655s
-- panel_text_svg_export: ~1.066s
-
-Results:
-- 11 regions detected
-- preserved layout structure
-- preserved text positioning
-- editable SVG output
+Reiser4 deserves to compile again.
